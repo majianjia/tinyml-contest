@@ -3,3 +3,9 @@ data_indices
 test_*
 train_*
 tinyml_contest_data_training
+.vs
+.idea
+__pycache__
+x64
+.layer_q_list
+.sconsign.dblite

@@ -17,6 +17,7 @@ from tensorflow.keras import backend as K
 import pickle
 import numpy as np
 
+from nnom import *
 
 # def precision(y_true, y_pred):
 #     TP = tf.reduce_sum(y_true * tf.round(y_pred))
@@ -81,7 +82,7 @@ def build_model(x_shape):
     x = ReLU()(x)
     x = Dropout(0.2)(x)
     x = Dense(1)(x)
-    x = sigmoid(x)
+    x = Activation("sigmoid")(x)
     # x = Conv2D(10, kernel_size=(3, 3), strides=(1, 1), padding="valid")(x)
     # x = GlobalAveragePooling2D()(x)
     #predictions = Softmax()(x)
@@ -131,8 +132,7 @@ def build_model2(x_shape):
     x = Dense(1)(x)
     # x = Conv2D(10, kernel_size=(3, 3), strides=(1, 1), padding="valid")(x)
     # x = GlobalAveragePooling2D()(x)
-    x = sigmoid(x)
-    # predictions = Sigmoid()(x)
+    x = Activation("sigmoid")(x)
 
     model = Model(inputs=inputs, outputs=x)
     return model
@@ -174,17 +174,16 @@ def build_model3(x_shape):
     x = concatenate([x1, x2], axis=-1)
 
     x = GRU(32, return_sequences=True, dropout=0.2)(x)
-    x = GRU(32, return_sequences=True, dropout=0.2)(x)
 
-    x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
+    # x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
     x = MaxPooling1D(4)(x)
 
     x = Flatten()(x)
-    x = Dense(64)(x)
+    x = Dense(24)(x)
     x = ReLU()(x)
     x = Dropout(0.3)(x)
     x = Dense(1)(x)
-    x = sigmoid(x)
+    x = Activation("sigmoid")(x)
     #predictions = x #Softmax()(x)
 
     return Model(inputs=inputs, outputs=x)
@@ -207,8 +206,7 @@ def train(model, x_train, y_train, x_test, y_test, batch_size=256, epochs=50):
               validation_data=(x_test, y_test),
               shuffle=True)
 
-    save_model(model, "model")
-    return history
+    return history, model
 
 def main():
     physical_devices = tf.config.list_physical_devices('GPU')
@@ -235,6 +233,7 @@ def main():
 
     epochs = 10
     batch_size = 1024
+    timestamp_size = batch_size
     num_classes = 2
 
     train_data = np.array(train_data)
@@ -266,7 +265,18 @@ def main():
 
     model = build_model3(test_data.shape[1:])
 
-    history = train(model, train_data, train_label, test_data, test_label, batch_size, epochs)
+    history, model = train(model, train_data, train_label, test_data, test_label, batch_size, epochs)
+    model.save("model")
+
+    del model
+    tf.keras.backend.clear_session()
+
+    model = tf.keras.models.load_model('model', custom_objects={'precision': precision, 'recall':recall, 'fbscore':fbscore})
+
+    generate_test_bin(test_data, test_label, name="test_data_with_label.bin")
+
+    generate_model(model, train_data[:timestamp_size*4], name='weights.h')
+ 
 
     plt.plot(history.history["accuracy"], label="accuracy")
     plt.plot(history.history["precision"], label="precision")

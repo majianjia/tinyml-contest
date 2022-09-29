@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\examples\keyword_spotting\mfcc.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\backends\nnom_local.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\backends\nnom_local_q15.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\core\nnom.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\core\nnom_layers.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\core\nnom_tensor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\core\nnom_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_activation.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_avgpool.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_baselayer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_concat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_conv2d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_conv2d_trans.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_cropping.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_dense.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_dw_conv2d.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_flatten.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_global_pool.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_gru_cell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_input.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_lambda.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_lstm_cell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_matrix.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_maxpool.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_output.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_reshape.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_rnn.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_simple_cell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_softmax.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_sumpool.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_upsample.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="nnom\src\layers\nnom_zero_padding.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\keyword_spotting\kws_weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\keyword_spotting\mfcc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\mnist-cnn\mcu\weights_cnn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\mnist-densenet\weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\mnist-simple\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\mnist-simple\weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\mnist-simple\mcu\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\mnist-simple\mcu\weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\octave-conv\image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\octave-conv\weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\rnn-denoise\denoise_weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\rnn-denoise\equalizer_coeff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\rnn-denoise\mfcc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\rnn-denoise\wav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\rnn-denoise\weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\uci-har-rnn\weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\examples\uci-inception\uci_weights.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\nnom_layers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\nnom_local.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\nnom_tensor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\nnom_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_activation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_avgpool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_baselayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_concat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_conv2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_conv2d_trans.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_cropping.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_dense.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_dw_conv2d.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_flatten.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_global_pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_gru_cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_lambda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_lstm_cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_maxpool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_reshape.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_rnn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_simple_cell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_softmax.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_sumpool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_upsample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\inc\layers\nnom_zero_padding.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nnom\port\nnom_port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test_data_with_label.bin">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

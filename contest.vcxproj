@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{99ABF58A-E502-4495-B4E9-A34E7B5F0F49}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\work\personal\tinyml-contest\nnom\port;D:\work\personal\tinyml-contest\nnom\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="main.c" />
+    <ClCompile Include="nnom\examples\keyword_spotting\mfcc.c" />
+    <ClCompile Include="nnom\src\backends\nnom_local.c" />
+    <ClCompile Include="nnom\src\backends\nnom_local_q15.c" />
+    <ClCompile Include="nnom\src\core\nnom.c" />
+    <ClCompile Include="nnom\src\core\nnom_layers.c" />
+    <ClCompile Include="nnom\src\core\nnom_tensor.c" />
+    <ClCompile Include="nnom\src\core\nnom_utils.c" />
+    <ClCompile Include="nnom\src\layers\nnom_activation.c" />
+    <ClCompile Include="nnom\src\layers\nnom_avgpool.c" />
+    <ClCompile Include="nnom\src\layers\nnom_baselayer.c" />
+    <ClCompile Include="nnom\src\layers\nnom_concat.c" />
+    <ClCompile Include="nnom\src\layers\nnom_conv2d.c" />
+    <ClCompile Include="nnom\src\layers\nnom_conv2d_trans.c" />
+    <ClCompile Include="nnom\src\layers\nnom_cropping.c" />
+    <ClCompile Include="nnom\src\layers\nnom_dense.c" />
+    <ClCompile Include="nnom\src\layers\nnom_dw_conv2d.c" />
+    <ClCompile Include="nnom\src\layers\nnom_flatten.c" />
+    <ClCompile Include="nnom\src\layers\nnom_global_pool.c" />
+    <ClCompile Include="nnom\src\layers\nnom_gru_cell.c" />
+    <ClCompile Include="nnom\src\layers\nnom_input.c" />
+    <ClCompile Include="nnom\src\layers\nnom_lambda.c" />
+    <ClCompile Include="nnom\src\layers\nnom_lstm_cell.c" />
+    <ClCompile Include="nnom\src\layers\nnom_matrix.c" />
+    <ClCompile Include="nnom\src\layers\nnom_maxpool.c" />
+    <ClCompile Include="nnom\src\layers\nnom_output.c" />
+    <ClCompile Include="nnom\src\layers\nnom_reshape.c" />
+    <ClCompile Include="nnom\src\layers\nnom_rnn.c" />
+    <ClCompile Include="nnom\src\layers\nnom_simple_cell.c" />
+    <ClCompile Include="nnom\src\layers\nnom_softmax.c" />
+    <ClCompile Include="nnom\src\layers\nnom_sumpool.c" />
+    <ClCompile Include="nnom\src\layers\nnom_upsample.c" />
+    <ClCompile Include="nnom\src\layers\nnom_zero_padding.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="nnom\examples\keyword_spotting\kws_weights.h" />
+    <ClInclude Include="nnom\examples\keyword_spotting\mfcc.h" />
+    <ClInclude Include="nnom\examples\mnist-cnn\mcu\weights_cnn.h" />
+    <ClInclude Include="nnom\examples\mnist-densenet\weights.h" />
+    <ClInclude Include="nnom\examples\mnist-simple\image.h" />
+    <ClInclude Include="nnom\examples\mnist-simple\mcu\image.h" />
+    <ClInclude Include="nnom\examples\mnist-simple\mcu\weights.h" />
+    <ClInclude Include="nnom\examples\mnist-simple\weights.h" />
+    <ClInclude Include="nnom\examples\octave-conv\image.h" />
+    <ClInclude Include="nnom\examples\octave-conv\weights.h" />
+    <ClInclude Include="nnom\examples\rnn-denoise\denoise_weights.h" />
+    <ClInclude Include="nnom\examples\rnn-denoise\equalizer_coeff.h" />
+    <ClInclude Include="nnom\examples\rnn-denoise\mfcc.h" />
+    <ClInclude Include="nnom\examples\rnn-denoise\wav.h" />
+    <ClInclude Include="nnom\examples\rnn-denoise\weights.h" />
+    <ClInclude Include="nnom\examples\uci-har-rnn\weights.h" />
+    <ClInclude Include="nnom\examples\uci-inception\uci_weights.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_activation.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_avgpool.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_baselayer.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_concat.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_conv2d.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_conv2d_trans.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_cropping.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_dense.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_dw_conv2d.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_flatten.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_global_pool.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_gru_cell.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_input.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_lambda.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_lstm_cell.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_matrix.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_maxpool.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_output.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_reshape.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_rnn.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_simple_cell.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_softmax.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_sumpool.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_upsample.h" />
+    <ClInclude Include="nnom\inc\layers\nnom_zero_padding.h" />
+    <ClInclude Include="nnom\inc\nnom_layers.h" />
+    <ClInclude Include="nnom\inc\nnom_local.h" />
+    <ClInclude Include="nnom\inc\nnom_tensor.h" />
+    <ClInclude Include="nnom\inc\nnom_utils.h" />
+    <ClInclude Include="nnom\port\nnom_port.h" />
+    <ClInclude Include="weights.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test_data_with_label.bin" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
