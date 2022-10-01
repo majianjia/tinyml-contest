@@ -13,3 +13,8 @@ Debug
 tmp.*
 model/variables
 model/assets
+tinyml-contest-mcu/MDK-ARM/tinyml-contest-mcu.uvguix.majianjia
+tmp.data-00000-of-00001
+tmp.index
+model/variables/variables.data-00000-of-00001
+model/variables/variables.index

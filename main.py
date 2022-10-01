@@ -95,32 +95,19 @@ def build_model(x_shape):
 def build_model2(x_shape):
     inputs = Input(shape=x_shape)
 
-    x1 = Conv1D(64, kernel_size=3, strides=1, padding='same')(inputs)
-    x1 = BatchNormalization()(x1)
-    x1 = MaxPool1D(2, strides=1, padding="same")(x1)
-
-    x2 = Conv1D(32, kernel_size=5, strides=1, padding="same")(inputs)
-    x2 = BatchNormalization()(x2)
-    x2 = MaxPool1D(2, strides=1, padding="same")(x2)
-
-    x3 = Conv1D(32, kernel_size=7, strides=1, padding="same")(inputs)
-    x3 = BatchNormalization()(x3)
-    x3 = MaxPool1D(2, strides=1, padding="same")(x3)
-    x = concatenate([x1, x2, x3], axis=-1)
-
-    x = Conv1D(64, kernel_size=3, strides=1, padding="valid")(x)
+    x = Conv1D(64, kernel_size=3, strides=1, padding='same')(inputs)
     x = BatchNormalization()(x)
     x = ReLU()(x)
-    x = MaxPool1D(4, strides=2, padding="same")(x)
+    x = MaxPool1D(2, strides=1, padding="same")(x)
     x = Dropout(0.2)(x)
 
-    x = Conv1D(64, kernel_size=3, strides=1, padding="valid")(x)
+    x = Conv1D(128, kernel_size=3, strides=1, padding='same')(x)
     x = BatchNormalization()(x)
     x = ReLU()(x)
-    x = MaxPool1D(4, strides=2, padding="same")(x)
+    x = MaxPool1D(2, strides=1, padding="same")(x)
     x = Dropout(0.2)(x)
 
-    x = Conv1D(64, kernel_size=3, strides=1, padding="valid")(x)
+    x = Conv1D(256, kernel_size=3, strides=1, padding="same")(x)
     x = BatchNormalization()(x)
     x = ReLU()(x)
     x = MaxPool1D(4, strides=2, padding="same")(x)
@@ -160,12 +147,11 @@ def build_model3(x_shape):
     x3 = MaxPooling1D(4)(x3)
     x = concatenate([x1, x2, x3], axis=-1)
 
-    x = Conv1D(12, kernel_size=(3), strides=(1), padding='same')(x)
+    x = Conv1D(8, kernel_size=(3), strides=(1), padding='same')(x)
     x = BatchNormalization()(x)
     x = ReLU()(x)
     x = Dropout(0.5)(x)
     x = MaxPooling1D(2)(x)
-
 
     # x = BatchNormalization()(x)
 
@@ -192,7 +178,7 @@ def build_model3(x_shape):
     # x1 = GRU(32, return_sequences=True, dropout=0.2)(x)
     # x2 = GRU(32, return_sequences=True, go_backwards=True, dropout=0.2)(x)
     # x = concatenate([x1, x2], axis=-1)
-    x = GRU(16, return_sequences=True, dropout=0.4)(x)
+    x = GRU(2, return_sequences=True, dropout=0.4)(x)
 
     # x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
 
@@ -309,8 +295,10 @@ def main():
     generate_test_bin(test_data, test_label, name="test_data_with_label.bin")
     print("true label count", np.sum(test_label))
 
-    generate_model(model, test_data[:2048], name=r'weights_contest.h')
- 
+    generate_model(model, test_data[:2048], quantize_method='kld', name=r'weights_contest.h')
+    #generate_model(model, test_data[:2048], per_channel_quant=True, name=r'weights_contest.h')
+
+
     if(history != None):
         plt.plot(history.history["accuracy"], label="accuracy")
         plt.plot(history.history["precision"], label="precision")
