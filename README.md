@@ -4,7 +4,7 @@
 
 This model consist of a few 1D-Convolution layer (Inception structure) and 1 GRU recurrent layer. 
 
-The total trainable parameter is just under `2k` a tiny model that can achieve 95+ score. The model is quantised into 8-bit ops and accelerated with CMSIS-NN backend. Can inference one test data in `30ms @ 80MHz Cortex M4` . 
+The total trainable parameters is just under `2k` a tiny model that can achieve 95+ score. The model is quantised into 8-bit ops and accelerated with CMSIS-NN backend. Can inference one test data in `34ms @ 80MHz Cortex M4`, with the complexity only `220k MAC`. 
 
 Code size
 
@@ -54,9 +54,7 @@ To disable logs, please void the marco 'NNOM_LOG(...)' in 'nnom_port.h'.
 Data format: Channel last (HWC)
 Start compiling model...
 Layer(#)         Activation    output shape    ops(MAC)   mem(in, out, buf)      mem blk lifetime
-
 -------------------------------------------------------------------------------------------------
-
 #1   Input      -          - (   1,1250,   1,)          (  1250,  1250,     0)    4 - - -  - - - - 
 #2   Conv2D     - ReLU     - (   1, 625,   8,)      25k (  1250,  5000,     0)    3 1 - -  - - - - 
 #3   MaxPool    -          - (   1, 156,   8,)          (  5000,  1248,     0)    2 1 1 1  - - - - 
@@ -71,9 +69,7 @@ Layer(#)         Activation    output shape    ops(MAC)   mem(in, out, buf)     
 #12  Flatten    -          - ( 936,          )          (   936,   936,     0)    - 1 - -  - - - - 
 #13  Dense      - Sigmoid  - (   1,          )      936 (   936,     1,  1872)    1 1 1 -  - - - - 
 #14  Output     -          - (   1,          )          (     1,     1,     0)    - - 1 -  - - - - 
-
 -------------------------------------------------------------------------------------------------
-
 Memory cost by each block:
  blk_0:2496  blk_1:5000  blk_2:624  blk_3:1248  blk_4:624  blk_5:0  blk_6:0  blk_7:0  
  Memory cost by network buffers: 9992 bytes
@@ -130,9 +126,7 @@ Model running time: 0 ms
 
 Print running stat..
 Layer(#)        -   Time(us)     ops(MACs)   ops/us 
-
 --------------------------------------------------------
-
 #1  Input      -         0                  
 #2  Conv2D     -         0          25k     
 #3  MaxPool    -         0                  
@@ -152,8 +146,11 @@ Summary:
 Total ops (MAC): 222272(0.22M)
 Prediction time :0us
 Total memory:15024
-Top 1 Accuracy on Tensorflow 96.09%
-Top 1 Accuracy on NNoM  96.55%
+Top 1 Accuracy on Tensorflow 96.57%
+Top 1 Accuracy on NNoM  96.41%
+
+Process finished with exit code 0
+
 ```
 
 More information will be updated on https://github.com/majianjia/tinyml-contest and https://github.com/majianjia/nnom
