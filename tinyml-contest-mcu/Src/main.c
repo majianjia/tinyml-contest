@@ -166,7 +166,7 @@ int main(void)
 	start_time = getCurrentMicros();
     
 		model_run(model);
-		rst = nnom_output_data[0]>=64? 1: 0; // due to the low resolution, this need to be reduce. 
+		rst = nnom_output_data[0]>=64? 1: 0; // 0-127
 		
 	end_time = getCurrentMicros();
     // Send the code "ok" to tell the upper computer that inference is done and ready to send results.

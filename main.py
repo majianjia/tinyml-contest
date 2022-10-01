@@ -174,20 +174,17 @@ def build_model3(x_shape):
     # x1 = LSTM(32, return_sequences=True)(x)
     # x2 = LSTM(32, return_sequences=True, go_backwards=True)(x)
     # x = add([x1, x2])
-    x = GRU(8, return_sequences=True, dropout=0.4)(x)
+    x = GRU(12, return_sequences=True, dropout=0.4)(x)
     # x1 = GRU(32, return_sequences=True, dropout=0.2)(x)
     # x2 = GRU(32, return_sequences=True, go_backwards=True, dropout=0.2)(x)
     # x = concatenate([x1, x2], axis=-1)
-    x = GRU(8, return_sequences=True, dropout=0.4)(x)
-    
-
-    # x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
+    # x = GRU(8, return_sequences=True, dropout=0.4)(x)
+    # x = GRU(8, return_sequences=True, dropout=0.4)(x)
 
     x = Flatten()(x)
     x = Dropout(0.3)(x)
     x = Dense(1)(x)
     x = Activation("sigmoid")(x)
-    #predictions = x #Softmax()(x)
 
     return Model(inputs=inputs, outputs=x)
 
@@ -206,7 +203,7 @@ def train(model, x_train, y_train, x_test, y_test, batch_size=256, epochs=50):
     model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         filepath=checkpoint_filepath,
         save_weights_only=True,
-        monitor='recall',
+        monitor='fbscore',
         mode='max',
         save_best_only=True,
         verbose=1)
