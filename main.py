@@ -128,26 +128,26 @@ def build_model2(x_shape):
 
 def build_model3(x_shape):
     inputs = Input(shape=x_shape)
-    x1 = Conv1D(16, kernel_size=(5), strides=(2), padding='same')(inputs)
+    x1 = Conv1D(8, kernel_size=(5), strides=(2), padding='same')(inputs)
     x1 = BatchNormalization()(x1)
     x1 = ReLU()(x1)
     x1 = Dropout(0.5)(x1)
     x1 = MaxPooling1D(4)(x1)
 
-    x2 = Conv1D(8, kernel_size=(9), strides=(2), padding='same')(inputs)
+    x2 = Conv1D(4, kernel_size=(9), strides=(2), padding='same')(inputs)
     x2 = BatchNormalization()(x2)
     x2 = ReLU()(x2)
     x2 = Dropout(0.5)(x2)
     x2 = MaxPooling1D(4)(x2)
 
-    x3 = Conv1D(8, kernel_size=(13), strides=(2), padding='same')(inputs)
+    x3 = Conv1D(4, kernel_size=(13), strides=(2), padding='same')(inputs)
     x3 = BatchNormalization()(x3)
     x3 = ReLU()(x3)
     x3 = Dropout(0.5)(x3)
     x3 = MaxPooling1D(4)(x3)
     x = concatenate([x1, x2, x3], axis=-1)
 
-    x = Conv1D(8, kernel_size=(3), strides=(1), padding='same')(x)
+    x = Conv1D(4, kernel_size=(3), strides=(1), padding='same')(x)
     x = BatchNormalization()(x)
     x = ReLU()(x)
     x = Dropout(0.5)(x)
@@ -174,11 +174,12 @@ def build_model3(x_shape):
     # x1 = LSTM(32, return_sequences=True)(x)
     # x2 = LSTM(32, return_sequences=True, go_backwards=True)(x)
     # x = add([x1, x2])
-    x = GRU(16, return_sequences=True, dropout=0.4)(x)
+    x = GRU(8, return_sequences=True, dropout=0.4)(x)
     # x1 = GRU(32, return_sequences=True, dropout=0.2)(x)
     # x2 = GRU(32, return_sequences=True, go_backwards=True, dropout=0.2)(x)
     # x = concatenate([x1, x2], axis=-1)
-    x = GRU(2, return_sequences=True, dropout=0.4)(x)
+    x = GRU(8, return_sequences=True, dropout=0.4)(x)
+    
 
     # x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
 
@@ -244,7 +245,7 @@ def main():
     with open("test_label.pkg", "rb") as fp:
         test_label = pickle.load(fp)
 
-    epochs = 10
+    epochs = 20
     batch_size = 256
     timestamp_size = batch_size
     num_classes = 2
