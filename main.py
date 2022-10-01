@@ -94,6 +94,7 @@ def build_model(x_shape):
 
 def build_model2(x_shape):
     inputs = Input(shape=x_shape)
+
     x1 = Conv1D(64, kernel_size=3, strides=1, padding='same')(inputs)
     x1 = BatchNormalization()(x1)
     x1 = MaxPool1D(2, strides=1, padding="same")(x1)
@@ -143,20 +144,28 @@ def build_model3(x_shape):
     x1 = Conv1D(16, kernel_size=(5), strides=(2), padding='same')(inputs)
     x1 = BatchNormalization()(x1)
     x1 = ReLU()(x1)
+    x1 = Dropout(0.5)(x1)
     x1 = MaxPooling1D(4)(x1)
+
     x2 = Conv1D(8, kernel_size=(9), strides=(2), padding='same')(inputs)
     x2 = BatchNormalization()(x2)
     x2 = ReLU()(x2)
+    x2 = Dropout(0.5)(x2)
     x2 = MaxPooling1D(4)(x2)
+
     x3 = Conv1D(8, kernel_size=(13), strides=(2), padding='same')(inputs)
     x3 = BatchNormalization()(x3)
     x3 = ReLU()(x3)
+    x3 = Dropout(0.5)(x3)
     x3 = MaxPooling1D(4)(x3)
     x = concatenate([x1, x2, x3], axis=-1)
 
     x = Conv1D(12, kernel_size=(3), strides=(1), padding='same')(x)
     x = BatchNormalization()(x)
+    x = ReLU()(x)
+    x = Dropout(0.5)(x)
     x = MaxPooling1D(2)(x)
+
 
     # x = BatchNormalization()(x)
 
@@ -179,20 +188,16 @@ def build_model3(x_shape):
     # x1 = LSTM(32, return_sequences=True)(x)
     # x2 = LSTM(32, return_sequences=True, go_backwards=True)(x)
     # x = add([x1, x2])
-    x = GRU(16, return_sequences=True, dropout=0.3)(x)
+    x = GRU(16, return_sequences=True, dropout=0.4)(x)
     # x1 = GRU(32, return_sequences=True, dropout=0.2)(x)
     # x2 = GRU(32, return_sequences=True, go_backwards=True, dropout=0.2)(x)
     # x = concatenate([x1, x2], axis=-1)
-
-    x = GRU(8, return_sequences=True, dropout=0.3)(x)
-    x = GRU(4, return_sequences=True, dropout=0.3)(x)
+    x = GRU(16, return_sequences=True, dropout=0.4)(x)
 
     # x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
 
     x = Flatten()(x)
-    x = Dense(16)(x)
-    x = ReLU()(x)
-    x = Dropout(0.2)(x)
+    x = Dropout(0.3)(x)
     x = Dense(1)(x)
     x = Activation("sigmoid")(x)
     #predictions = x #Softmax()(x)
@@ -214,9 +219,10 @@ def train(model, x_train, y_train, x_test, y_test, batch_size=256, epochs=50):
     model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         filepath=checkpoint_filepath,
         save_weights_only=True,
-        monitor='val_fbscore',
+        monitor='recall',
         mode='max',
-        save_best_only=True)
+        save_best_only=True,
+        verbose=1)
 
     history = model.fit(x_train, y_train,
               batch_size=batch_size,
@@ -322,7 +328,11 @@ def main():
     # evaluate in Keras (for comparision)
     import sys
     #scores = evaluate_model(model, test_data, test_label)
+    # reload model.
+    model = tf.keras.models.load_model('model', custom_objects={'precision': precision, 'recall': recall, 'fbscore': fbscore})
     scores = model.evaluate(test_data, test_label, verbose=2)
+
+
     print(scores)
     # build NNoM
     os.system("scons")

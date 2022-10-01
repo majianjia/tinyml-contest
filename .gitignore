@@ -10,3 +10,6 @@ x64
 .layer_q_list
 .sconsign.dblite
 Debug
+tmp.*
+model/variables
+model/assets

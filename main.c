@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
 			
 			// save results
 			//fprintf(fp, "%d,%d\n", label, (int)roundf(prob));
-			int rslt = nnom_output_data[0] > 64 ? 1 : 0;
+			int rslt = nnom_output_data[0] >= 64 ? 1 : 0;
 			fprintf(fp, "%d,%d\n", true_label[i], rslt);
 		}
 		printf("Processing %d%%\n", (uint32_t)(seek * 100 / size));

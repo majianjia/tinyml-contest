@@ -74,8 +74,8 @@ uint32_t getCurrentMicros(void)
 int quantise_8bit(char qbit, float input)
 {
 	int qi = input * (1<<qbit); // only work with decimal bit >= 0
-	qi = qi > 127? 127:qi; 			// to 8bit range
-	qi = qi <-128? 128:qi;
+	qi = qi > 127? 127 : qi; 			// to 8bit range
+	qi = qi <-128? -128 : qi;
 	return qi;
 }
 
@@ -166,7 +166,7 @@ int main(void)
 	start_time = getCurrentMicros();
     
 		model_run(model);
-		rst = nnom_output_data[0]>64? 1: 0;
+		rst = nnom_output_data[0]>=64? 1: 0; // due to the low resolution, this need to be reduce. 
 		
 	end_time = getCurrentMicros();
     // Send the code "ok" to tell the upper computer that inference is done and ready to send results.
