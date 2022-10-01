@@ -140,13 +140,24 @@ def build_model2(x_shape):
 
 def build_model3(x_shape):
     inputs = Input(shape=x_shape)
-    x1 = Conv1D(12, kernel_size=(5), strides=(2), padding='same')(inputs)
+    x1 = Conv1D(16, kernel_size=(5), strides=(2), padding='same')(inputs)
+    x1 = BatchNormalization()(x1)
+    x1 = ReLU()(x1)
     x1 = MaxPooling1D(4)(x1)
-    x2 = Conv1D(12, kernel_size=(9), strides=(2), padding='same')(inputs)
+    x2 = Conv1D(8, kernel_size=(9), strides=(2), padding='same')(inputs)
+    x2 = BatchNormalization()(x2)
+    x2 = ReLU()(x2)
     x2 = MaxPooling1D(4)(x2)
-    x3 = Conv1D(12, kernel_size=(13), strides=(2), padding='same')(inputs)
+    x3 = Conv1D(8, kernel_size=(13), strides=(2), padding='same')(inputs)
+    x3 = BatchNormalization()(x3)
+    x3 = ReLU()(x3)
     x3 = MaxPooling1D(4)(x3)
     x = concatenate([x1, x2, x3], axis=-1)
+
+    x = Conv1D(12, kernel_size=(3), strides=(1), padding='same')(x)
+    x = BatchNormalization()(x)
+    x = MaxPooling1D(2)(x)
+
     # x = BatchNormalization()(x)
 
     # you can use either of the format below.
@@ -168,20 +179,20 @@ def build_model3(x_shape):
     # x1 = LSTM(32, return_sequences=True)(x)
     # x2 = LSTM(32, return_sequences=True, go_backwards=True)(x)
     # x = add([x1, x2])
-    x = LSTM(32, return_sequences=True, dropout=0.2)(x)
-    x1 = GRU(32, return_sequences=True, dropout=0.2)(x)
-    x2 = GRU(32, return_sequences=True, go_backwards=True, dropout=0.2)(x)
-    x = concatenate([x1, x2], axis=-1)
+    x = GRU(16, return_sequences=True, dropout=0.3)(x)
+    # x1 = GRU(32, return_sequences=True, dropout=0.2)(x)
+    # x2 = GRU(32, return_sequences=True, go_backwards=True, dropout=0.2)(x)
+    # x = concatenate([x1, x2], axis=-1)
 
-    x = GRU(32, return_sequences=True, dropout=0.2)(x)
+    x = GRU(8, return_sequences=True, dropout=0.3)(x)
+    x = GRU(4, return_sequences=True, dropout=0.3)(x)
 
     # x = Conv1D(16, kernel_size=(3), strides=(1), padding='same')(x)
-    x = MaxPooling1D(4)(x)
 
     x = Flatten()(x)
-    x = Dense(24)(x)
+    x = Dense(16)(x)
     x = ReLU()(x)
-    x = Dropout(0.3)(x)
+    x = Dropout(0.2)(x)
     x = Dense(1)(x)
     x = Activation("sigmoid")(x)
     #predictions = x #Softmax()(x)
@@ -199,13 +210,23 @@ def train(model, x_train, y_train, x_test, y_test, batch_size=256, epochs=50):
     #               metrics=['accuracy', precision, recall])
     model.summary()
 
+    checkpoint_filepath = 'tmp'
+    model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath=checkpoint_filepath,
+        save_weights_only=True,
+        monitor='val_fbscore',
+        mode='max',
+        save_best_only=True)
+
     history = model.fit(x_train, y_train,
               batch_size=batch_size,
               epochs=epochs,
               verbose=2,
               validation_data=(x_test, y_test),
-              shuffle=True)
+              shuffle=True,
+             callbacks = [model_checkpoint_callback])
 
+    model.load_weights(checkpoint_filepath)
     return history, model
 
 def main():
@@ -232,7 +253,7 @@ def main():
         test_label = pickle.load(fp)
 
     epochs = 10
-    batch_size = 1024
+    batch_size = 256
     timestamp_size = batch_size
     num_classes = 2
 
@@ -247,7 +268,6 @@ def main():
     idx = np.random.permutation(len(test_label))
     test_data, test_label = test_data[idx], test_label[idx]
 
-
     # print("train label", np.average(train_label))
     # print("validation label", np.average(test_label))
 
@@ -261,10 +281,17 @@ def main():
     # reshape to 4 d because we build for 4d?
     train_data = train_data.reshape(train_data.shape[0], train_data.shape[1], 1)
     test_data = test_data.reshape(test_data.shape[0], test_data.shape[1], 1)
+
+    train_data = np.clip(train_data, -1, 1)
+    test_data = np.clip(test_data, -1, 1)
     print('train_data shape:', train_data.shape)
+
+    # plt.hist(train_data.flatten(), bins=100)
+    # plt.show()
 
     model = build_model3(test_data.shape[1:])
 
+    history = None
     history, model = train(model, train_data, train_label, test_data, test_label, batch_size, epochs)
     model.save("model")
 
@@ -274,22 +301,52 @@ def main():
     model = tf.keras.models.load_model('model', custom_objects={'precision': precision, 'recall':recall, 'fbscore':fbscore})
 
     generate_test_bin(test_data, test_label, name="test_data_with_label.bin")
+    print("true label count", np.sum(test_label))
 
-    generate_model(model, train_data[:timestamp_size*4], name='weights.h')
+    generate_model(model, test_data[:2048], name=r'weights_contest.h')
  
+    if(history != None):
+        plt.plot(history.history["accuracy"], label="accuracy")
+        plt.plot(history.history["precision"], label="precision")
+        plt.plot(history.history["recall"], label="recall")
+        plt.plot(history.history["fbscore"], label="fbscore")
 
-    plt.plot(history.history["accuracy"], label="accuracy")
-    plt.plot(history.history["precision"], label="precision")
-    plt.plot(history.history["recall"], label="recall")
-    plt.plot(history.history["fbscore"], label="fbscore")
+        plt.plot(history.history["val_accuracy"], label="val_accuracy")
+        plt.plot(history.history["val_precision"], label="val_precision")
+        plt.plot(history.history["val_recall"], label="val_recall")
+        plt.plot(history.history["val_fbscore"], label="val_fbscore")
+        plt.legend()
+        plt.show()
 
-    plt.plot(history.history["val_accuracy"], label="val_accuracy")
-    plt.plot(history.history["val_precision"], label="val_precision")
-    plt.plot(history.history["val_recall"], label="val_recall")
-    plt.plot(history.history["val_fbscore"], label="val_fbscore")
-    plt.legend()
-    plt.show()
+    # --------- for test in CI ----------
+    # evaluate in Keras (for comparision)
+    import sys
+    #scores = evaluate_model(model, test_data, test_label)
+    scores = model.evaluate(test_data, test_label, verbose=2)
+    print(scores)
+    # build NNoM
+    os.system("scons")
 
+    # do inference using NNoM
+    cmd = r".\nnom.exe" if 'win' in sys.platform else "./nnom"
+    os.system(cmd)
+    try:
+        # get NNoM results
+        import pandas as pd
+        result = pd.read_csv("result.csv")
+        # result = np.genfromtxt('result.csv', dtype=np.int, skip_header=1)
+        # result = result[:, 0]  # the first column is the label, the second is the probability
+        result = result["predic"].values
+        label = test_label.flatten()  # use the original numerical label
+        acc = np.sum(result == label).astype('float32') / len(result)
+        if (acc > 0.5):
+            print("Top 1 Accuracy on Tensorflow %.2f%%" % (scores[1] * 100))
+            print("Top 1 Accuracy on NNoM  %.2f%%" % (acc * 100))
+            return 0
+        else:
+            raise Exception('test failed, accuracy is %.1f%% < 80%%' % (acc * 100.0))
+    except:
+        raise Exception('could not perform the test with NNoM')
 
 
 # Press the green button in the gutter to run the script.

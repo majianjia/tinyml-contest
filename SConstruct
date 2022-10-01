@@ -37,4 +37,4 @@ env.Append(CPPPATH=['%s/inc'%(ROOT),'%s/port'%(ROOT)])
 #if(os.getenv('USE_CMSIS_NN') == 'YES'):
 #	env.Append(CPPDEFINES=['NNOM_USING_CMSIS_NN'])
 
-env.Program('mnist',objs)
+env.Program('nnom',objs)

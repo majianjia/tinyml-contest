@@ -104,7 +104,7 @@ def generate_test_bin(x, y, dec_bits=None, name='test_data_with_label.bin'):
         test_label = np.argwhere(y == 1).astype(np.int8)  # test data
         test_label = test_label[:, 1]
     else:
-        test_label = y
+        test_label = y.astype(np.int8)
 
     # get data
     dat = x.astype(dtype="byte")  # test data

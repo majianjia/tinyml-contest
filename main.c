@@ -14,7 +14,7 @@
 #include <assert.h>
 
 #include "nnom.h"
-#include "weights.h"
+#include "weights_contest.h"
 
 int8_t* load(const char* file, size_t * size)
 {
@@ -62,15 +62,9 @@ int main(int argc, char* argv[])
 
 	input = load("test_data_with_label.bin", &size);	// load a continuous input dataset (test bin)
 	fp = fopen("result.csv", "w");			// csv file for result
-	fprintf(fp, "label, prob\n");				// header of csv
+	fprintf(fp, "label,predic\n");				// header of csv
 	printf("validation size: %d\n", (uint32_t)size); 
 	
-
-#ifdef NNOM_USING_STATIC_MEMORY
-	// when use static memory buffer, we need to set it before create
-	nnom_set_static_buf(static_buf, sizeof(static_buf)); 
-#endif
-
 	model = nnom_model_create();				// create NNoM model
 	pre = prediction_create(model, nnom_output_data, sizeof(nnom_output_data), 1); // mnist, 10 classes, get top-4
 	//model_set_callback(model, callback);
