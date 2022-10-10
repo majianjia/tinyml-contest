@@ -1,4 +1,4 @@
-**Team NNoM submission for TinyML Contest** ([2022 ACM/IEEE TinyML Design Contest at ICCAD](https://tinymlcontest.github.io/))
+**Team NNoM submission for TinyML Contest** ([2022 ACM/IEEE TinyML Design Contest at ICCAD](https://tinymlcontest.github.io/TinyML-Design-Contest/index.html))
 
 ## Model
 
