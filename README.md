@@ -1,5 +1,13 @@
 **Team NNoM submission for TinyML Contest** ([2022 ACM/IEEE TinyML Design Contest at ICCAD](https://tinymlcontest.github.io/TinyML-Design-Contest/index.html))
 
+[Contest result is out](https://docs.google.com/spreadsheets/d/1kafItUyYegW2E4sp21_bDiy9_wnOLNqeoMVQ8HXpe60/). NNoM ranks 10 out of 41 teams, overall a great result considering the limited time we put into the contest and the risks we took. 
+
+- We took a huge risk by using recurrent layers, which is not easy to train with fixed-point. 
+- NNoM framework took extra memories compared to CUBEMX-MX(not too much but have affect the scoring) because its extra evaluation tools and more layer supports. 
+
+Seeing the top ranking, there are indeed tricks can applied. For example, keeping the model small (inference time short + small memory) while losing some F_beta can still keep the final score. I am very satisfied with the result as this was the first contest we paticipated. Looking forward for the next one :-)
+
+
 ## Model
 
 This model consist of a few 1D-Convolution layer (Inception structure) and 1 GRU recurrent layer. 
